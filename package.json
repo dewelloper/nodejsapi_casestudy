@@ -4,7 +4,8 @@
   "description": "a RESTful API with a single endpoint that fetches the data in the provided MongoDB collection and return the results in the requested format",
   "main": "service.js",
   "scripts": {
-    "dev": "nodemon ./server.js localhost 3001",
+    "start": "node ./service.js PORT=3001",
+    "dev": "nodemon ./service.js localhost 3001",
     "test": "jest",
     "test:watch": "jest --watchAll",
     "debug": "node --inspect-brk=localhost:3001 node_modules/.bin/jest --runInBand -t"
@@ -34,5 +35,8 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.14"
+  },
+  "engines": {
+    "node": "17.0.1"
   }
 }
