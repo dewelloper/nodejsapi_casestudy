@@ -18,8 +18,7 @@
 const express = require('express');
 require('dotenv').config()
 const app = express();
-const port = process.env.PORT || 3000;
-//const Routers = require('./routes');
+const port = process.env.PORT || 3001;
 app.use(express.json());
 
 const indexRouter = require('./routes/index');
@@ -30,15 +29,15 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDefinition = {
     openapi: '3.0.0',
     info: {
-      title: 'Case study Api',
+      title: 'Case study Rest Api',
       version: '1.0.0',
       description:
-        'This is a REST API made with Express for special case',
+        'This is a REST API made with Express for a special case',
       license: {
         name: 'Licensed Under MIT'
       },
       contact: {
-        name: 'JSONPlaceholder'
+        name: 'a Case Study for Andrei'
       },
     },
     servers: [
