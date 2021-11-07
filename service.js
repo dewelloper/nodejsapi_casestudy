@@ -1,7 +1,7 @@
 //Author: Hamit Yıldırım
 //Date: 11.04.2021
 //Version: 1.0
-//Revision: 0
+//Revision: 1
 
 // I have kept the name of this file generic so that it is classified according to the job it will do.
 
@@ -16,51 +16,21 @@
 
 
 const express = require('express')
-require('dotenv').config()
+      , url = require("url");
+require('dotenv').config();
 const app = express();
+const sitemap = require('express-sitemap-html')
 const port = process.env.PORT || 3001;
 app.use(express.json());
+app.use(express.urlencoded());
 
 const indexRouter = require('./routes/index');
 const caseRouter = require('./routes/case.route');
-const swaggerJSDoc = require('swagger-jsdoc');
-const swaggerUi = require('swagger-ui-express');
-
-
-const swaggerDefinition = {
-    openapi: '3.0.0',
-    info: {
-      title: 'Case study Rest Api',
-      version: '1.0.0',
-      description:
-        'This is a REST API made with Express for a special case',
-      license: {
-        name: 'Licensed Under MIT'
-      },
-      contact: {
-        name: 'a Case Study for Andrei'
-      },
-    },
-    servers: [
-      {
-        url: 'http://localhost:3001',
-        description: 'Development RestAPI example',
-      },
-    ],
-  };
-  
-  const options = {
-    swaggerDefinition,
-    apis: ['./routes/*.js'],
-  }
-  
-  const swaggerSpec = swaggerJSDoc(options);
-  
   
   app.use('/', indexRouter);
-  app.use('/api/case', caseRouter);
-  app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+  app.use('/case', caseRouter);
 
+  app.get('/sitemap', sitemap(app));
 
   app.use(function(err, req, res, next) {
     // set locals, only providing error in development

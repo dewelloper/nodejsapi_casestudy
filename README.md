@@ -1,6 +1,3 @@
-<h1 align="center">Hi 👋, I'm Hamit Yıldırım</h1>
-<h3 align="center">I love coding</h3>
-
 This project outlines how to write a simple API generic using Node JS and Express.
 
 The following main issues were addressed in the project.
