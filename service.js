@@ -15,7 +15,7 @@
 // Even the object-mapper is for simplicity and pine is likewise helpful when developing
 
 
-const express = require('express');
+const express = require('express')
 require('dotenv').config()
 const app = express();
 const port = process.env.PORT || 3001;
@@ -25,6 +25,7 @@ const indexRouter = require('./routes/index');
 const caseRouter = require('./routes/case.route');
 const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
+
 
 const swaggerDefinition = {
     openapi: '3.0.0',
@@ -55,10 +56,20 @@ const swaggerDefinition = {
   
   const swaggerSpec = swaggerJSDoc(options);
   
+  
   app.use('/', indexRouter);
   app.use('/api/case', caseRouter);
   app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
+
+  app.use(function(err, req, res, next) {
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
+    // render the error page
+    res.status(err.status || 500);
+    res.status(err.status || 500).send('error')
+  });
 
 app.listen(port, () => {
     console.log(`Server listening on the port  ${port}`);

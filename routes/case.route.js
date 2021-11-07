@@ -128,8 +128,5 @@ const router = express.Router();
         caseController.deleteCase(req, res).then(data => res.json(data));
     });
     
-    router.get('/', (req, res) => {
-        res.send(`<h1>API Works !!!</h1>`)
-    });
 
     module.exports = router;
