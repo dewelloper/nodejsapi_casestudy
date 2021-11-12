@@ -29,7 +29,7 @@ app.use(express.urlencoded());
 const indexRouter = require('./routes/index');
 const caseRouter = require('./routes/case.route');
   
-  //app.use('/', indexRouter);
+  //app.use('/', indexRouter); // no need to it anymore
   app.use('/', caseRouter);
 
   app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
