@@ -1,0 +1,236 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Case API",
+    "description": "This project has been prepared for a special case test"
+  },
+  "host": "localhost:3001",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Case",
+      "description": "This is case rest endpoints"
+    }
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "securityDefinitions": {
+    "apiKeyAuth": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "X-API-KEY",
+      "description": "any description..."
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/getacase": {
+      "post": {
+        "tags": [
+          "Case"
+        ],
+        "description": "Endpoint to post case",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Case information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Case"
+            },
+            "description": "Case got successfully."
+          }
+        }
+      }
+    },
+    "/case": {
+      "post": {
+        "tags": [
+          "Case"
+        ],
+        "description": "Endpoint to post case",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Case information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddCase"
+            }
+          }
+        ],
+        "responses": {},
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Case"
+        ],
+        "description": "Endpoint to put case",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Case information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddCase"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Case"
+            },
+            "description": "Case update successfully."
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/casereturnall": {
+      "post": {
+        "tags": [
+          "Case"
+        ],
+        "description": "Endpoint to post case",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Case information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddCase"
+            }
+          }
+        ],
+        "responses": {},
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/{caseid}": {
+      "delete": {
+        "tags": [
+          "Case"
+        ],
+        "description": "Endpoint to delete a specific case.",
+        "parameters": [
+          {
+            "name": "caseid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Case"
+            },
+            "description": "Case deleted successfully."
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Record": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "example": "XXXXXXXXXXX"
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "2021.11.12"
+        },
+        "totalCount": {
+          "type": "number",
+          "example": 1
+        }
+      }
+    },
+    "Case": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "example": "XxXXXXX"
+        },
+        "msg": {
+          "type": "string",
+          "example": "Success."
+        },
+        "record": {
+          "$ref": "#/definitions/Record"
+        }
+      }
+    },
+    "AddCase": {
+      "type": "object",
+      "properties": {
+        "startDate": {
+          "type": "string",
+          "example": "2021.11.12"
+        },
+        "endDate": {
+          "type": "string",
+          "example": "2021.11.19"
+        },
+        "minCount": {
+          "type": "number",
+          "example": 200
+        },
+        "maxCount": {
+          "type": "number",
+          "example": 1220
+        }
+      },
+      "required": [
+        "startDate",
+        "endDate"
+      ]
+    },
+    "Id": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "a bson id for getting from mongodb"
+        }
+      }
+    }
+  }
+}

@@ -19,7 +19,9 @@ const express = require('express')
       , url = require("url");
 require('dotenv').config();
 const app = express();
-const sitemap = require('express-sitemap-html')
+const swaggerUi = require('swagger-ui-express')
+const swaggerFile = require('./swagger-output.json')
+
 const port = process.env.PORT || 3001;
 app.use(express.json());
 app.use(express.urlencoded());
@@ -27,10 +29,10 @@ app.use(express.urlencoded());
 const indexRouter = require('./routes/index');
 const caseRouter = require('./routes/case.route');
   
-  app.use('/', indexRouter);
-  app.use('/case', caseRouter);
+  //app.use('/', indexRouter);
+  app.use('/', caseRouter);
 
-  app.get('/sitemap', sitemap(app));
+  app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 
   app.use(function(err, req, res, next) {
     // set locals, only providing error in development
@@ -41,6 +43,6 @@ const caseRouter = require('./routes/case.route');
     res.status(err.status || 500).send('error')
   });
 
-app.listen(port, () => {
-    console.log(`Server listening on the port  ${port}`);
-})
+  app.listen(port, () => {
+      console.log(`Server listening on the port  ${port}`);
+  })
